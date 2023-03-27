@@ -16,3 +16,18 @@ def hello_world():
    return "Olá, mundo!"
 
 import os
+import requests
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
+with open("credenciais.json", mode='w') as fobj:
+    fobj.write(GOOGLE_SHEETS_CREDETIONS)
+conta = ServiceAccountCredentials.from_json()_keyfile_name("credenciais.json")
+
+nome_json = "/content/automacaodados-5259129dd763.json"
+conta = ServiceAccountCredentials.from_json_keyfile_name(nome_json)
+api = gspread.authorize(conta) # sheets.new
+planilha = api.open_by_key("1BTcO4G_FS1tp6_hRcPUk_4fts6ayt7Ms2cvYHsqD9nM")
+sheet = planilha.worksheet("dadosrobo")
+
