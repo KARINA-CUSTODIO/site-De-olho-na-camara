@@ -1,15 +1,18 @@
 import os
-import requests
+
 import gspread
-from flask import Flask
+import requests
+from flask import Flask, request
 from oauth2client.service_account import ServiceAccountCredentials
+from tchan import ChannelScraper
+
 
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
-
+TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
 GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
-with open("credenciais.json", mode='w') as fobj:
-    fobj.write(GOOGLE_SHEETS_CREDETIONS)
-conta = ServiceAccountCredentials.from_json()_keyfile_name("credenciais.json")
+with open("credenciais.json", mode="w") as arquivo:
+  arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
+conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
 api = gspread.authorize(conta)
 planilha = api.open_by_key("1ZDyxhXlCtCjMbyKvYmMt_8jAKN5JSoZ7x3MqlnoyzAM")
 sheet = planilha.worksheet("Sheet1")
@@ -27,7 +30,7 @@ def ultimas_promocoes():
     if contador == 10:
       return resultado
 
-
+    
 menu = """
 <a href="/">Página inicial</a> | <a href="/promocoes">PROMOÇÕES</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
 <br>
@@ -35,7 +38,7 @@ menu = """
 
 @app.route("/")
 def index():
-  return menu + "Olá, mundo! Esse é meu site. (Karina Custódio)"
+  return menu + "Olá, mundo! Esse é meu site. (Álvaro Justen)"
 
 @app.route("/sobre")
 def sobre():
@@ -44,6 +47,7 @@ def sobre():
 @app.route("/contato")
 def contato():
   return menu + "Aqui vai o conteúdo da página Contato"
+
 
 @app.route("/promocoes")
 def promocoes():
@@ -74,6 +78,12 @@ def promocoes2():
       break
   return conteudo + "</ul>"
 
+@app.route("/dedoduro")
+def dedoduro():
+  mensagem = {"chat_id": TELEGRAM_ADMIN_ID, "text": "Alguém acessou a página dedo duro!"}
+  resposta = requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=mensagem)
+  return f"Mensagem enviada. Resposta ({resposta.status_code}): {resposta.text}"
+
 
 @app.route("/dedoduro2")
 def dedoduro2():
@@ -81,4 +91,15 @@ def dedoduro2():
   return "Planilha escrita!"
 
 
+@app.route("/telegram-bot")
+def telegram_bot():
+  update = request.json
+  chat_id = update["message"]["chat"]["id"]
+  message = update["message"]["text"]
+  nova_mensagem = {"chat_id": chat_id, "text": message}
+  requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
+  return "ok"
 
+
+  
+  
