@@ -1,6 +1,8 @@
 flask
 gunicorn
-tchan
 requests
 gspread
 oauth2client
+pandas
+altair
+plotly.express
