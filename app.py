@@ -100,7 +100,7 @@ menor_autor = autores.iloc[-1]['nomeAutor']
 app = Flask(__name__)
 
 menu = """
-<a href="/">Página inicial</a> | <a href="/sobre">Sobre</a> | <a href="/gastos">Gastos</a> | <a href="/contato">Contato</a> | <a href="/telegram">Telegram</a>
+<a href="/">Página inicial</a> | <a href="/sobre">Sobre</a> | <a href="/gastosceap">GastosCEAP</a> |<a href="/projetosdelei">ProjetosdeLei</a> <a href="/contato">Contato</a> | 
 <br>
 """
 
