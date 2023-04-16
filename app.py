@@ -45,10 +45,6 @@ gastadores = despesas.groupby(['txNomeParlamentar', 'sgUF'])['vlrLiquido'].sum()
 gastadores = pd.DataFrame(gastadores)
 gastadores = gastadores.reset_index()
 
-#Levando dados do dataframe, pro Google sheets
-sheet_gastadores = planilha.get_worksheet(2)
-sheet_gastadores.update([gastadores.columns.values.tolist()] + gastadores.values.tolist())
-
 #Deputado/a que mais gastou
 maiorgastador = gastadoresBR_top10.iloc[0]['txNomeParlamentar']
 
@@ -77,10 +73,6 @@ autores = proposicoes.groupby('nomeAutor').count()
 autores = pd.DataFrame(autores)
 autores = autores.sort_values(by='idProposicao', ascending = False)
 autores = autores.reset_index()
-
-#Levando dados do dataframe, pro Google sheets
-sheet_autores = planilha.get_worksheet(1)
-sheet_autores.update([autores.columns.values.tolist()] + autores.values.tolist())
 
 maior_autor = autores.iloc[0]['nomeAutor']
 
