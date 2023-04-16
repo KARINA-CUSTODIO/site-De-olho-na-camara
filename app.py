@@ -114,4 +114,4 @@ def contato():
 
 @app.route("/gastosCEAP")
 def gastos():
-  return"Em 2022, o total gasto pelos(as) deputados federais foi igual à R${gastos}. \n A média de gastos da cota parlamentar por deputado(a) foi de R${mediaBr}, o(a) deputado(a) que mais gastou foi {maiorgastador}, o(a) que menos gastou foi {menorgastador}."
+  return f"Em 2022, o total gasto pelos(as) deputados federais foi igual à R${gastos}. \n A média de gastos da cota parlamentar por deputado(a) foi de R${mediaBr}, o(a) deputado(a) que mais gastou foi {maiorgastador}, o(a) que menos gastou foi {menorgastador}."
