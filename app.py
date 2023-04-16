@@ -10,15 +10,6 @@ import json
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 
-TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
-GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
-with open("credenciais.json", mode="w") as arquivo:
-  arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
-conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
-api = gspread.authorize(conta)
-planilha = api.open_by_key("1BTcO4G_FS1tp6_hRcPUk_4fts6ayt7Ms2cvYHsqD9nM")
-sheet = planilha.get_worksheet(3)
-
 #Criando função que baixa arquivo
 def baixar_arquivo(url, endereco):
     resposta = requests.get(url)
