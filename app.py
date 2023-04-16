@@ -91,10 +91,10 @@ menu = """
 def sobre():
   return menu + "Aqui vai o conteúdo da página Sobre"
 
-@app.route("/contato")
-def contato():
-  return menu + "Aqui vai o conteúdo da página Contato"
-
 @app.route("/gastosCEAP")
 def gastos():
   return f"Em 2022, o total gasto pelos(as) deputados federais foi igual à R${gastos}. \n A média de gastos da cota parlamentar por deputado(a) foi de R${mediaBr}, o(a) deputado(a) que mais gastou foi {maiorgastador}, o(a) que menos gastou foi {menorgastador}."
+
+@app.route("/contato")
+def contato():
+  return menu + "Aqui vai o conteúdo da página Contato"
